@@ -8,8 +8,8 @@ from csv import reader
 from matplotlib import pyplot #as plt
 from dateutil import parser
 col_counter=0
-#attenzione, nell'istr. seguente, il file csv deve essere nella stessa
-#directory in cui ho salvato questo programma
+
+#data01.csv file must be saved in the same directory of this code
 with open('data01.csv', 'r') as f:
     dat = list(reader(f))
 
@@ -26,14 +26,12 @@ for el in dat[0]:
     col_counter +=1
 
 a=int(input('Choose number for y entry (0-10)'))
-#l'istr. seguente estrae le letture del parametro selezionato
-#ma faccio un typecasting a float, se no i valori in y sono sballati
+
+# the following instruction gets the values of selected entry
+# but I typecast to float to get a proper plot
 temp = [float(i[a]) for i in dat[1::]]
-#l'istr. seguente estrae l'ora in cui ogni lettura è stata fatta
+#next a line to get datetime values for x axis
 time = [parser.parse(i[0]) for i in dat[1::]]
-#Time è una lista; gli elementi della lista sono
-#degli oggetti di classe datetime.datetime;
-#è possibile calcolare la differenza tra due elementi di time;
 
 headers=dat[0]
 
@@ -43,9 +41,8 @@ end=time[-1]
 
 pyplot.title('letture ISS dal '+ str(start) + ' al ' + str(end))
 pyplot.ylabel(headers[a])
-"""
-Usare una delle due istruzioni seguenti
-"""
+
+#use one of the two following
 pyplot.plot(time, temp,'.', markersize=1)
 #pyplot.plot(time, temp, linewidth=1)
 
